@@ -14,4 +14,5 @@ router.get('/lists/:id', listController.list_byId)
 
 router.delete('/lists/:id', listController.list_deleteById)
 
+// to server
 module.exports = router
