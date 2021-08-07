@@ -1,18 +1,12 @@
 const express = require('express')
 
-const List = require('../models/list')
+const listController = require('../controllers/listController')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    List.find().sort({ createdAt: -1 })
-        .then(result => res.render('index', { title: 'ToDoList', lists: result }))
-        .catch(err => console.log(err))
-})
+router.get('/', listController.list_index)
 
-router.get('/create', (req, res) => {
-    res.render('create', { title: "Create Todo List" })
-})
+router.get('/create', listController.list_create)
 
 router.post('/lists', (req, res) => {
     const list = new List(req.body)
