@@ -25,10 +25,17 @@ const list_byId = (req, res) => {
         .catch(err => console.log(err))
 }
 
+const list_deleteById = (req, res) => {
+    const id = req.params.id;
+    List.findByIdAndDelete(id)
+        .then(result => res.json({ redirect: '/lists' }))
+        .catch(err => console.log(err))
+}
+
 module.exports = {
     list_index,
     list_create,
     list_post,
     list_byId,
-
+    list_deleteById
 }

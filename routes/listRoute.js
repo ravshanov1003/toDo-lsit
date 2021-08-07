@@ -12,11 +12,6 @@ router.post('/lists', listController.list_post)
 
 router.get('/lists/:id', listController.list_byId)
 
-router.delete('/lists/:id', (req, res) => {
-    const id = req.params.id;
-    List.findByIdAndDelete(id)
-        .then(result => res.json({ redirect: '/lists' }))
-        .catch(err => console.log(err))
-})
+router.delete('/lists/:id', listController.list_deleteById)
 
 module.exports = router
