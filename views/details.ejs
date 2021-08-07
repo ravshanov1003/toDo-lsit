@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <div class="details content">
+                <h1>
+                    <%= list.title %>
+                </h1>
+                <div class="content">
+                    <h4>
+                        <%= list.snippet %>
+                    </h4>
+                    <p>
+                        <%= list.body %>
+                    </p>
+                </div>
+                <a class="delete" data-doc="<%= list._id%>">Delete</a>
+            </div>
+            <script>
+                const trashcan = document.querySelector('a.delete');
+                trashcan.addEventListener('click', (e) => {
+                    const endpoint = `/lists/${trashcan.dataset.doc}`;
+                    fetch(endpoint, {
+                            method: 'DELETE'
+                        })
+                        .then((response) => response.json())
+                        .then((data) => window.location.href = data.redirect)
+                        .catch(err => console.log(err))
+                });
+            </script>
+    </body>
+
+</html>

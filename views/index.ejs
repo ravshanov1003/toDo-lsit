@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <h1>ToDo list</h1>
+            <div class="list">
+                <% if(lists.length>0) {%>
+                    <% lists.forEach((list) =>{ %>
+                        <a class="single" href="/lists/<%= list._id %>">
+                            <div class="todo">
+                                <h2 class="title">
+                                    <%= list.title%>
+                                </h2>
+                                <h2 class="snippet">
+                                    <%= list.snippet%>
+                                </h2>
+                            </div>
+                        </a>
+                        <% }) %>
+                            <% } else { %>
+                                <p>There are no lists to display... </p>
+                                <% } %>
+            </div>
+
+    </body>
+
+</html>

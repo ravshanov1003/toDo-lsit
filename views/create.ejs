@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+
+            <div>
+                <h1>Create toDo List</h1>
+                <form class="form" action="/lists" method="POST">
+                    <label for="title">List title</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="snippet">List snippet</label>
+                    <input type="text" id="title" name="snippet" required>
+                    <label for="body">List body</label>
+                    <textarea id="body" cols="63" rows="10" name="body" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+    </body>
+
+</html>
