@@ -10,12 +10,7 @@ router.get('/create', listController.list_create)
 
 router.post('/lists', listController.list_post)
 
-router.get('/lists/:id', (req, res) => {
-    const id = req.params.id;
-    List.findById(id)
-        .then(result => res.render('details', { list: result, title: "List details" }))
-        .catch(err => console.log(err))
-})
+router.get('/lists/:id', listController.list_byId)
 
 router.delete('/lists/:id', (req, res) => {
     const id = req.params.id;

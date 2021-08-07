@@ -18,9 +18,17 @@ const list_post = (req, res) => {
         .catch(err => console.log(err))
 }
 
+const list_byId = (req, res) => {
+    const id = req.params.id;
+    List.findById(id)
+        .then(result => res.render('details', { list: result, title: "List details" }))
+        .catch(err => console.log(err))
+}
+
 module.exports = {
     list_index,
     list_create,
     list_post,
+    list_byId,
 
 }
