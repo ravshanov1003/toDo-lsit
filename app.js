@@ -27,5 +27,5 @@ app.get("/lists", (req, res) => {
 app.use(listRoute);
 
 app.use((req, res) => {
-    res.status(404).send('<h1>Ups! Page not founded...</h1>')
+    res.status(404).render('404', { title: 404 })
 })
