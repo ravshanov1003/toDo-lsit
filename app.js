@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
-const List = require('./models/list')
+const listRoute = require('./routes/listRoute')
 
 // express app
 const app = express()
@@ -19,41 +19,12 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    List.find().sort({ createdAt: -1 })
-        .then(result => res.render('index', { title: 'ToDoList', lists: result }))
-        .catch(err => console.log(err))
-})
-
-app.get('/create', (req, res) => {
-    res.render('create', { title: "Create Todo List" })
-})
-
 app.get("/lists", (req, res) => {
     res.redirect("/")
 });
 
-app.post('/lists', (req, res) => {
-    const list = new List(req.body)
-        // res.send(lists.push(list))
-    list.save()
-        .then((result) => res.redirect('/lists'))
-        .catch(err => console.log(err))
-})
-
-app.get('/lists/:id', (req, res) => {
-    const id = req.params.id;
-    List.findById(id)
-        .then(result => res.render('details', { list: result, title: "List details" }))
-        .catch(err => console.log(err))
-})
-
-app.delete('/lists/:id', (req, res) => {
-    const id = req.params.id;
-    List.findByIdAndDelete(id)
-        .then(result => res.json({ redirect: '/lists' }))
-        .catch(err => console.log(err))
-})
+// use routes
+app.use(listRoute);
 
 app.use((req, res) => {
     res.status(404).send('<h1>Ups! Page not founded...</h1>')
